@@ -1,17 +1,44 @@
-import numpy as np
+from __future__ import print_function
+import itertools
 
-with open("input.txt") as f:
-    lines = list(map(lambda line: line.replace("\n", ""), f.readlines()))
-    data = [(x.split(" ")[0], x.split(" ")[2], x.split(" ")[-1]) for x in lines]
-    destinations = list(set([x[0] for x in data] + [x[1] for x in data]))
-    g = np.ones((len(destinations), len(destinations))) * np.inf
-    print(destinations)
-    print(g)
-    for d in data:
-        x = destinations.index(d[0])
-        y = destinations.index(d[1])
-        g[x][y] = d[2]
-    print(g)
+verbose = False
 
-    ans = np.ones((len(destinations), len(destinations))) * np.inf
-    
+# read in the locations and distances from the file
+f = open('input.txt')
+
+path = {}
+locations = []
+
+for line in f:
+    lline = line.split()
+    city1 = lline[0]
+    city2 = lline[2]
+    distance = int(lline[4])
+
+    path[city1 + city2] = distance
+    path[city2 + city1] = distance
+
+    locations.append(city1)
+    locations.append(city2)
+f.close()
+
+locations = set(locations)  # find unique locations
+if verbose:
+    print(locations)
+    print(path)
+
+# find shortest route
+shortest_route_length = 999999
+longest_route_length = 0
+for route in itertools.permutations(locations):
+    route_length = 0
+    for city1, city2 in zip(route[:-1], route[1:]):
+        route_length += path[city1 + city2]
+    if verbose:
+        print(route, route_length)
+    if route_length < shortest_route_length:
+        shortest_route_length = route_length
+    elif route_length > longest_route_length:
+        longest_route_length = route_length
+print("Shortest route length:", shortest_route_length)
+print("Longest route length:", longest_route_length)
