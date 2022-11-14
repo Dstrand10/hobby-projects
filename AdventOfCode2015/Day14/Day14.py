@@ -48,5 +48,5 @@ with open("input.txt") as f:
         ):
             leading_reindeer.score += 1
 
-    print("Answer 1: " + str( max(list(map(lambda x: x.dist, reindeers)))))
+    print("Answer 1: " + str(max(list(map(lambda x: x.dist, reindeers)))))
     print("Answer 2: " + str(max(list(map(lambda x: x.score, reindeers)))))
