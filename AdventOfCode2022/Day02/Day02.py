@@ -60,10 +60,7 @@ def func2(data):
 
 
 def main():
-    # data = [int(line.strip()) for line in open("input.txt").readlines()]
-    # data = open("input.txt").read()
-    data = open("input.txt").read().split("\n")
-    #data = [row.split() for row in data]
+    data = open("Day02/input.txt").read().split("\n")
 
     sol1 = func1(data)
     print(f"Solution 1: {sol1}")

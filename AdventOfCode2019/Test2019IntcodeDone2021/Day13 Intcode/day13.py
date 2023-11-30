@@ -1,6 +1,5 @@
-from Intcode import Intcode
+from Test2019IntcodeDone2021.IntcodeFile import Intcode
 import numpy as np
-
 
 class ArcadeCabinet:
 
